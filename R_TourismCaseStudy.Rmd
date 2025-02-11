@@ -24,7 +24,7 @@ library(corrplot)    # For correlation matrix visualization
 ## Load the Dataset
 ```{r}
 # Load the dataset from the "Tourism.xlsx" file
-tourism <- read_excel("./exercise/databases/Tourism.xlsx")
+tourism <- read_excel("../exercise/databases/Tourism.xlsx")
 
 # Display the first few rows of the dataset to understand its structure
 head(tourism)
@@ -117,6 +117,20 @@ table(tourism$Accommodation_type, tourism$Purpose_of_trip)
 ## Part 4: Hypothesis Testing
 ## Perform T-Test
 ```{r}
+# Assumptions Testing: Normality Test and Homogeneity Test
+# group 1 - private, group 2 - business
+group1 <- tourism[tourism$Accommodation_type=="Private",]  
+group2 <- tourism[tourism$Accommodation_type!="Private",]  
+
+# Now performing Normality test for the two groups
+shapiro.test(group1$Total_expenditure)
+shapiro.test(group2$Total_expenditure)
+# Since p-value is below 0.05, hence the groups are not normally distributted
+
+# Now performing Homogeneity test for the two groups
+leveneTest(tourism$Total_expenditure ~ tourism$Accommodation_type, data = tourism)
+# Since p-value is above 0.05, hence the groups are homogeneous ie. variance is equal among the groups.
+
 # Perform a T-Test to compare total expenditure by accommodation type
 if ("Total_expenditure" %in% colnames(tourism) && "Accommodation_type" %in% colnames(tourism)) {
     tourism$Accommodation_type <- as.factor(tourism$Accommodation_type)  # Ensure it's a factor
@@ -137,7 +151,7 @@ ks.test(tourism$Total_expenditure, "pnorm", mean=mean(tourism$Total_expenditure)
 
 # Levene Test: Homogeneity Check
 library(car)
-install.package
+#install.package
 leveneTest(tourism$Total_expenditure ~ tourism$Purpose_of_trip, data = tourism)
 group
 
