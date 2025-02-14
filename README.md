@@ -3,14 +3,12 @@ Statistical Data Analysis in R Programming Environment
 
 
 ---
-title: "sapoon"
-output: html_document
+
 ---
 
 ---
 title: "Tourism Dataset Analysis"
 author: "Saad Ahmed Jamal"
-output: html_document
 ---
 
 # Load Required Libraries
