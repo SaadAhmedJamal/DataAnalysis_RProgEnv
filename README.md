@@ -1,5 +1,4 @@
-# DataAnalysis_RProgEnv
-Statistical Data Analysis in R Programming Environment
+# Statistical Data Analysis in R Programming Environment
 
 
 ---
